@@ -1,5 +1,4 @@
-const API_URL = "http://<IP-PUBLICA-EC2>:8000"; 
-
+const API_URL = "http://54.213.211.207:8000";
 document.getElementById("shorten-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const originalUrl = document.getElementById("original-url").value;

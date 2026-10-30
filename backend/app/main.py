@@ -4,12 +4,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.schemas import URLCreate, URLResponse
 from app import database
 
+# Instanciar FastAPI una sola vez con sus metadatos
 app = FastAPI(title="AWS Link Shortener API")
 
 # Configurar CORS para permitir peticiones desde el frontend (S3)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # En producción puedes restringirlo al dominio de tu S3
+    allow_origins=["*"],  # Permite peticiones desde cualquier origen (S3)
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -19,9 +20,7 @@ app.add_middleware(
 def shorten_url(payload: URLCreate, request: Request):
     item = database.create_url_record(payload.original_url)
     
-    # Construir la URL corta utilizando la IP/dominio de la petición actual o EC2
-    base_url = f"{request.url.scheme}://{request.client.host}:8000" # O usa tu IP pública de EC2 directamente
-    # Una forma más robusta si estás detrás de un proxy es usar el header host:
+    # Construir la URL corta utilizando el header host de la petición
     host = request.headers.get("host", "localhost:8000")
     short_url = f"{request.url.scheme}://{host}/{item['short_code']}"
 
