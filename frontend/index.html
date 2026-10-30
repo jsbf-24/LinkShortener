@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acortador de Enlaces Cloud</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Acortador de Enlaces</h1>
+        <form id="shorten-form">
+            <input type="url" id="original-url" placeholder="Pega tu URL aquí (https://...)" required>
+            <button type="submit">Acortar URL</button>
+        </form>
+        
+        <div id="result" class="hidden">
+            <p>¡Enlace acortado con éxito!</p>
+            <input type="text" id="short-url-output" readonly>
+            <button id="copy-btn">Copiar</button>
+        </div>
+
+        <div id="error" class="hidden error-msg"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
